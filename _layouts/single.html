@@ -56,10 +56,6 @@ layout: default
 
       {% include post_pagination.html %}
     </div>
-
-    {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
-      {% include comments.html %}
-    {% endif %}
   </article>
 
   {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
@@ -86,4 +82,19 @@ layout: default
       </div>
     </div>
   {% endif %}
+  <div class="page__related">
+    <h4 class="page__related-title">{{ site.data.ui-text[site.locale].comments_label | default: "You May Also Enjoy" }}</h4>
+    <div class="custom_comment">
+      <script 
+        src="https://utteranc.es/client.js"
+        repo="hj-blog/hj-blog.github.io"
+        issue-term="pathname"
+        label="comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  </div>
+  
 </div>

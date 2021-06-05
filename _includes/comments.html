@@ -154,13 +154,6 @@
       <h4 class="page__comments-title">{{ comments_label }}</h4>
       <section id="utterances-comments"></section>
     {% when "custom" %}
-      <script src="https://utteranc.es/client.js"
-        repo="hj-blog/hj-blog.github.io"
-        issue-term="pathname"
-        label="comments"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-      </script>
+      {% include /comments-providers/custom.html %}
   {% endcase %}
 </div>
