@@ -50,6 +50,9 @@
 <title>{{ seo_title | default: site.title }}{% if paginator %}{% unless paginator.page == 1 %} {{ title_separator }} {{ site.data.ui-text[site.locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}{% endif %}</title>
 <meta name="description" content="{{ seo_description }}">
 
+<!-- Naver webmaster tools -->
+<meta name="naver-site-verification" content="5a81cb6297f0c58c9bf81c7eb3493f0cef356ef7" />
+
 <!-- Google Search Console -->
 <meta name="google-site-verification" content="IM941IQeKDFRCVe1d3IET2Jmk1XyYF10kxahG_bMmI0">
 
