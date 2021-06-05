@@ -20,6 +20,11 @@
   // letter-spacing: -0.75px;
 }
 
+@media all and (max-width: 900px) {
+  .page__related {
+    float: initial;
+  }
+}
 .custom_comment > div {
   margin: 0;
 }
