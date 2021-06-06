@@ -19,3 +19,16 @@
 </div>
 
 <div class="page__footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}. {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }} <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+<script type="text/javascript">
+  // 마우스 우클릭 막기
+  document.oncontextmenu=function(){return false;}
+
+  // F12 개발자도구 비활성
+  document.addEventListener('keydown',function(e){
+    if ( e.keyCode == 123) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+  })
+</script>
