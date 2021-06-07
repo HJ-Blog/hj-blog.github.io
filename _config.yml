@@ -16,9 +16,9 @@ minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Site Settings
 locale: "ko-KR"
-title: "Blog"
+title: "블로그"
 title_separator: "&#124;"
-subtitle: "This is my Blog"
+subtitle: "하나씩 알아가는 블로그"
 name: "Jiseong"
 description: "Jiseong's blog"
 url: "https://hj-blog.github.io"
@@ -30,7 +30,7 @@ masthead_title: # overrides the website title displayed in the masthead, use " "
 # breadcrumbs            : false # true, false (default)
 words_per_minute: 200
 comments:
-  provider: # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
+  provider: "utterances"
   disqus:
     shortname: # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -93,13 +93,13 @@ analytics:
 
 # Site Author
 author:
-  name: "Jiseong"
+  name: "홍지성"
   avatar: "/assets/images/profile.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio: "I am an **amazing** person."
-  location: "Republic of Korea"
+  bio: "저는 **프론트엔드** 개발자입니다."
+  location: "대한민국"
   # email: "dgf5820@gmail.com"
   links:
-    - label: "Email"
+    - label: "메일"
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:dgf5820@email.com"
     - label: "Website"
@@ -111,9 +111,9 @@ author:
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
-    - label: "GitHub"
+    - label: "깃허브"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/hjiseong"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
