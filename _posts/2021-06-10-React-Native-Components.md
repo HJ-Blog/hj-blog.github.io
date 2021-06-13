@@ -69,3 +69,109 @@ const App = () => (
 
 export default App;
 ```
+
+## FlatList
+
+기본 목록 화면을 구성하기 위한 가장 편리한 인터페이스라고 합니다. 일반적으로 우리가 목록을 나타내는 화면을 구성하는 경우에 가장 필요로 하는 것이 **선택한 요소의 데이터**를 불러오는 방법입니다.
+<br>
+<br>
+우선, FlatList 컴포넌트를 사용하기 위해서는 어떤 속성들이 필요하고, 어떻게 선택한 요소의 데이터를 불러올 수 있는지 알아보겠습니다.
+
+### 데이터 (data)
+
+이 속성에는 **배열 타입**의 데이터를 입력 받습니다. 아무래도 하나의 요소가 여러개의 정보를 가지고 있기 때문에 다음과 같이 오브젝트 배열일 가능성이 높습니다.
+
+```js
+const data = [
+  { id: 1, name: "name_1", email: "email_1@gmail.com" },
+  { id: 2, name: "name_2", email: "email_2@gmail.com" },
+  { id: 3, name: "name_3", email: "email_3@gmail.com" },
+];
+```
+
+### 렌더링 함수 (renderItem)
+
+데이터(data) 배열 안에 있는 각각의 오브젝트를 렌더링하기 위한 함수입니다. **name, email**과 같이 오브젝트의 정보를 렌더링하는 컴포넌트를 반환합니다.
+<br>
+<br>
+목록을 보여주는 화면에서는 각각의 요소가 클릭 시, 상세정보를 보여주는 액션이 필요하기 때문에, 클릭 이벤트를 연결해주기 위해서 전체를 **TouchableOpacity**로 감싸줬습니다.
+
+```jsx
+// 상태값
+const [selectedId, setSelectedId] = useState(null);
+
+// 렌더링 함수
+function renderItem({ item }) {
+  return (
+    <TouchableOpacity onPress={() => setSelectedId(item.id)}>
+      <Text>{item.name}</Text>
+      <Text>{item.email}</Text>
+    </TouchableOpacity>
+  );
+}
+```
+
+### 배열을 렌더링 할 때 사용할 키 값 (keyExtractor)
+
+리액트에서는 반복적으로 특정 컴포넌트를 렌더링 하는 경우에 고유한 값을 가지는 key 속성값을 넣어 주어야 합니다. FlatList 에서는 keyExtractor 함수를 통해서 어떤 값으로 키 값을 넣어줄 것인지 지정해 줄 수 있습니다.
+
+```jsx
+<FlatList keyExtractor={(item, index) => item.id} />
+```
+
+### 렌더링에 영향을 주는 또다른 값 (extraData)
+
+FlatList 안에 있는 요소들을 렌더링 하는 데에 영향을 주는 값은 데이터(data) 뿐입니다. 하지만, extraData 속성을 사용하면 추가적으로 영향을 주는 변수를 정의할 수 있습니다.
+<br>
+<br>
+예를들어, 다음과 같이 선택된 요소의 아이디를 추가하면, 요소를 클릭하여 현재 선택된 아이디가 변할 때마다, 리스트가 새롭게 렌더링 됩니다.
+
+```jsx
+<FlatList extraData={selectedId} />
+```
+
+### 샘플코드
+
+```jsx
+import React, { useState } from "react";
+import {
+  FlatList,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+
+const data = [
+  { id: 1, name: "name_1", email: "email_1@gmail.com" },
+  { id: 2, name: "name_2", email: "email_2@gmail.com" },
+  { id: 3, name: "name_3", email: "email_3@gmail.com" },
+];
+
+const App = () => {
+  const [selectedId, setSelectedId] = useState(null);
+
+  function renderItem({ item }) {
+    return (
+      <TouchableOpacity onPress={() => setSelectedId(item.id)}>
+        <Text>{item.name}</Text>
+        <Text>{item.email}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <SafeAreaView>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        extraData={selectedId}
+      />
+    </SafeAreaView>
+  );
+};
+
+export default App;
+```
