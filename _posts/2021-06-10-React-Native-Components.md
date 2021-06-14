@@ -25,8 +25,8 @@ toc_label: "리액트 네이티브 컴포넌트"
 ### 샘플코드
 
 ```jsx
-import React from "react";
-import { ActivityIndicator, View } from "react-native";
+import React from "react"
+import { ActivityIndicator, View } from "react-native"
 
 const App = () => (
   <View>
@@ -35,9 +35,9 @@ const App = () => (
     <ActivityIndicator size="small" color="#0000ff" />
     <ActivityIndicator size="large" color="#00ff00" />
   </View>
-);
+)
 
-export default App;
+export default App
 ```
 
 ## Button
@@ -55,8 +55,8 @@ export default App;
 ### 샘플코드
 
 ```jsx
-import React from "react";
-import { Button, View, Alert } from "react-native";
+import React from "react"
+import { Button, View, Alert } from "react-native"
 
 const App = () => (
   <View>
@@ -65,9 +65,9 @@ const App = () => (
       onPress={() => Alert.alert("Simple Button pressed")}
     />
   </View>
-);
+)
 
-export default App;
+export default App
 ```
 
 ## FlatList
@@ -86,7 +86,7 @@ const data = [
   { id: 1, name: "name_1", email: "email_1@gmail.com" },
   { id: 2, name: "name_2", email: "email_2@gmail.com" },
   { id: 3, name: "name_3", email: "email_3@gmail.com" },
-];
+]
 ```
 
 ### 렌더링 함수 (renderItem)
@@ -98,7 +98,7 @@ const data = [
 
 ```jsx
 // 상태값
-const [selectedId, setSelectedId] = useState(null);
+const [selectedId, setSelectedId] = useState(null)
 
 // 렌더링 함수
 function renderItem({ item }) {
@@ -107,7 +107,7 @@ function renderItem({ item }) {
       <Text>{item.name}</Text>
       <Text>{item.email}</Text>
     </TouchableOpacity>
-  );
+  )
 }
 ```
 
@@ -133,7 +133,7 @@ FlatList 안에 있는 요소들을 렌더링 하는 데에 영향을 주는 값
 ### 샘플코드
 
 ```jsx
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   FlatList,
   SafeAreaView,
@@ -141,16 +141,16 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-} from "react-native";
+} from "react-native"
 
 const data = [
   { id: 1, name: "name_1", email: "email_1@gmail.com" },
   { id: 2, name: "name_2", email: "email_2@gmail.com" },
   { id: 3, name: "name_3", email: "email_3@gmail.com" },
-];
+]
 
 const App = () => {
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(null)
 
   function renderItem({ item }) {
     return (
@@ -158,7 +158,7 @@ const App = () => {
         <Text>{item.name}</Text>
         <Text>{item.email}</Text>
       </TouchableOpacity>
-    );
+    )
   }
 
   return (
@@ -170,8 +170,137 @@ const App = () => {
         extraData={selectedId}
       />
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default App;
+export default App
+```
+
+## Image / ImageBackground
+
+둘 다 이미지를 표현하기 위한 컴포넌트이며, 이미지의 크기를 수동으로 지정해야 합니다. 로컬에 있는 이미지, 외부 이미지 링크, data:... 형식의 이미지 파일을 보여줄 수 있습니다.
+<br>
+<br>
+**ImageBackground** 는 컴포넌트 내부에 또다른 컴포넌트를 렌더링해서 이미지 위에 또다른 무언가를 보여줄 수 있습니다.
+
+### 이미지 경로 (source)
+
+프로젝트 폴더 내에 있는 로컬 이미지 경로, 외부에 있는 이미지 링크 그리고 data:... 형식의 이미지 파일을 나타냅니다.
+
+#### 로컬 이미지 경로
+
+```js
+require("../react-native-logo.png")
+```
+
+#### 외부 이미지 링크
+
+```js
+{
+  uri: "https://reactnative.dev/img/tiny_logo.png"
+}
+```
+
+#### data: 형식의 파일
+
+```js
+{
+  uri: "data:image/png;base64, ... "
+}
+```
+
+### 샘플코드
+
+```jsx
+import React from "react"
+import { View, Image, StyleSheet } from "react-native"
+
+const styles = StyleSheet.create({
+  tinyLogo: {
+    width: 50,
+    height: 50,
+  },
+  logo: {
+    width: 66,
+    height: 58,
+  },
+})
+
+const App = () => {
+  return (
+    <View>
+      <Image
+        style={styles.tinyLogo}
+        // source={require("../react-native-logo.png")}
+      />
+      <Image
+        style={styles.tinyLogo}
+        source={
+          {
+            // uri: "https://reactnative.dev/img/tiny_logo.png",
+          }
+        }
+      />
+      <Image
+        style={styles.logo}
+        source={
+          {
+            // uri: "data:image/png;base64, ... ",
+          }
+        }
+      />
+      <ImageBackground
+      // source={require("../react-native-logo.png")}
+      >
+        <Text>이미지 위에 보여집니다</Text>
+      </ImageBackground>
+    </View>
+  )
+}
+
+export default App
+```
+
+## KeyboardAvoidingView
+
+가상 키보드 때문에 보이지 않는 영역에 대한 문제를 해결하기위한 컴포넌트입니다. 키보드 높이에 따라 화면의 높이, 위치 또는 하단 패딩을 자동으로 조정할 수 있습니다.
+
+### 자동 조정 옵션 (behavior)
+
+가상 키보드에 의해 화면이 조정되는 옵션을 선택할 수 있습니다. **height(높이)**, **position(위치)**, **padding(하단 패딩)**
+
+### 샘플코드
+
+```jsx
+import React from "react"
+import {
+  View,
+  KeyboardAvoidingView,
+  TextInput,
+  Text,
+  Platform,
+  TouchableWithoutFeedback,
+  Button,
+  Keyboard,
+} from "react-native"
+
+const App = () => {
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View>
+          <Text>Header</Text>
+          <TextInput placeholder="Username" />
+          <View>
+            <Button title="Submit" onPress={() => null} />
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  )
+}
+
+export default App
 ```
