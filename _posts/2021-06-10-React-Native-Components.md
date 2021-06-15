@@ -103,7 +103,9 @@ const [selectedId, setSelectedId] = useState(null);
 // 렌더링 함수
 function renderItem({ item }) {
   return (
-    <TouchableOpacity onPress={() => setSelectedId(item.id)}>
+    <TouchableOpacity
+      onPress={() => setSelectedId(item.id)}
+    >
       <Text>{item.name}</Text>
       <Text>{item.email}</Text>
     </TouchableOpacity>
@@ -154,7 +156,9 @@ const App = () => {
 
   function renderItem({ item }) {
     return (
-      <TouchableOpacity onPress={() => setSelectedId(item.id)}>
+      <TouchableOpacity
+        onPress={() => setSelectedId(item.id)}
+      >
         <Text>{item.name}</Text>
         <Text>{item.email}</Text>
       </TouchableOpacity>
@@ -287,7 +291,9 @@ import {
 const App = () => {
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={
+        Platform.OS === "ios" ? "padding" : "height"
+      }
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
@@ -403,22 +409,31 @@ export default App;
 <br>
 **누른다(onPressIn) - 오래 누른다(onLongPress) - 뗀다(onPressOut)**
 
-### onPressIn
+### 누른다 (onPressIn)
 
 Pressable 컴포넌트를 누르기 시작했을때 실행되는 함수입니다.
 
-### onLongPress
+### 오래 누른다 (onLongPress)
 
 Pressable 컴포넌트를 누르기 시작해서 떼지 않고 0.5초 이상 있으면 실행되는 함수입니다.
 
-### onPressOut
+### 오래 누른다의 기준시간 (delayLongPress)
+
+Pressable 컴포넌트를 누르기 시작해서 떼지 않고 **delayLongPress** 밀리초 이상 있으면 onLongPress 함수가 실행됩니다.
+
+### 뗀다 (onPressOut)
 
 Pressable 컴포넌트를 누르다가 손을 떼는 순간 실행되는 함수입니다.
 
-### onPress
+### 눌렀다 떼는 행위를 했다 (onPress)
 
 Pressable 컴포넌트를 누르다가 손을 떼서 onPressOut 함수가 실행된 다음에 실행되는 함수입니다.
 (단, 0.5초 이상 눌렀을 경우에는 onPressOut 함수 이후에 onPress 함수가 호출되지 않습니다.)
+
+### 못누르게 비활성화 (disabled)
+
+특정 경우에 useState 훅과 함께 사용하여 누르지 못하게 비활성화를 할 수도 있습니다.
+(아이디를 입력해야 로그인을 누를 수 있다)
 
 ### 샘플코드
 
@@ -429,7 +444,9 @@ Pressable 컴포넌트를 누르다가 손을 떼서 onPressOut 함수가 실행
   }}
   style={({ pressed }) => [
     {
-      backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
+      backgroundColor: pressed
+        ? "rgb(210, 230, 255)"
+        : "white",
     },
   ]}
 >
@@ -439,4 +456,66 @@ Pressable 컴포넌트를 누르다가 손을 떼서 onPressOut 함수가 실행
     </Text>
   )}
 </Pressable>
+```
+
+## RefreshControl
+
+이 컴포넌트는 ScrollView 라는 컴포넌트와 함께 사용됩니다. 우리가 스마트폰에 있는 앱을 이용하다 보면 새로고침을 하고 싶을 때가 있습니다. 이미 알고 있는 분도 있겠지만, 대부분의 경우에 화면을 **위에서 아래로 당기면 새로고침**이 됩니다.
+<br>
+<br>
+특히 **스크롤이 있는 화면**에서 이러한 기능이 필수적으로 들어가고 있는 추세입니다.
+<br>
+<br>
+이렇게 스크롤이 맨 위에 있을 때, 보여지는 화면을 새로고침을 하기 위해 위에서 아래로 당기면 스마트폰에서 로딩 화면이 보여지게 됩니다. 이러한 화면을 위해 리액트 네이티브에서는 **RefreshControl** 컴포넌트를 지원하고 있습니다.
+
+### 화면의 새로고침 완료 여부 (refreshing)
+
+- 화면이 새로고짐 하기 전에는 false 입니다.
+- 위에서 아래로 드래그 하여 새로고침이 시작하면 true 로 변합니다.
+- 다시 새로고침이 완료되면 false 로 변합니다.
+
+### 샘플코드
+
+```jsx
+import React from "react";
+import {
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  Text,
+} from "react-native";
+
+const wait = (timeout) => {
+  return new Promise((resolve) =>
+    setTimeout(resolve, timeout)
+  );
+};
+
+const App = () => {
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
+  return (
+    <SafeAreaView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
+        <Text>
+          아래로 당기면 새로고침 로딩화면이 보입니다~
+        </Text>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default App;
 ```
