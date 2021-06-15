@@ -95,7 +95,7 @@ analytics:
 author:
   name: "홍지성"
   avatar: "/assets/images/profile.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio: "저는 **프론트엔드** 개발자입니다."
+  bio: "저는 **프론트엔드** 개발자입니다.<br>(2020-12-14 ~)"
   location: "대한민국"
   # email: "dgf5820@gmail.com"
   links:
