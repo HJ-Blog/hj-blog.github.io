@@ -313,7 +313,7 @@ export default App;
 
 기본값은 **none**이며, 모달 팝업이 나타나는 애니메이션을 지정할 수 있습니다. **slide**는 아래에서 위로 스윽~ 하고 올라오는 애니메이션이고, **fade**는 투명한 상태에서 점점 뚜렷하게 나타내는 애니메이션입니다.
 
-```js
+```jsx
 <Modal animationType="slide">
   <Text>Hello World!</Text>
 </Modal>
@@ -329,7 +329,7 @@ export default App;
 
 true 값으로 설정하면 전체 영역을 차지하는 모달팝업을 사용하고, false 라면 내부의 내용에 맞는 영역에만 팝업이 나타납니다.
 
-```js
+```jsx
 <Modal transparent={true}>
   <Text>Hello World!</Text>
 </Modal>
@@ -339,7 +339,7 @@ true 값으로 설정하면 전체 영역을 차지하는 모달팝업을 사용
 
 팝업에서 가장 핵심적인 기능인 나타내기/숨기기 입니다. 상태를 관리하는 useState 훅에서 boolean 형태의 값으로 관리하여 사용할 수 있습니다.
 
-```js
+```jsx
 const [modalVisible, setModalVisible] = useState(false);
 
 <Modal visible={modalVisible}>
@@ -351,7 +351,7 @@ const [modalVisible, setModalVisible] = useState(false);
 
 팝업이 닫힐 때 실행되는 함수입니다. 안드로이드에서 뒤로가기, 애플티비의 메뉴 버튼 클릭을 눌렀을 경우와같이 팝업이 닫힐 때 호출될 수 있습니다.
 
-```js
+```jsx
 <Modal
   onRequestClose={() => {
     Alert.alert("팝업이 닫힙니다.");
@@ -364,7 +364,7 @@ const [modalVisible, setModalVisible] = useState(false);
 
 ### 샘플코드
 
-```js
+```jsx
 import React, { useState } from "react";
 import { Modal, Text, View, Alert } from "react-native";
 
@@ -388,4 +388,55 @@ const App = () => {
 };
 
 export default App;
+```
+
+## Pressable
+
+손가락으로 눌렀을 때의 각각의 타이밍에 대해서 이벤트를 제공하고 있는 컴포넌트입니다. 다양한 태그를 감싸서 사용할 수 있습니다.
+<br>
+<br>
+이 컴포넌트는 딱 2가지의 경우로 동작이 진행됩니다.
+<br>
+<br>
+**누른다(onPressIn) - 뗀다(onPressOut) - 눌렀다 떼는 행위를 했다(onPress)**
+<br>
+<br>
+**누른다(onPressIn) - 오래 누른다(onLongPress) - 뗀다(onPressOut)**
+
+### onPressIn
+
+Pressable 컴포넌트를 누르기 시작했을때 실행되는 함수입니다.
+
+### onLongPress
+
+Pressable 컴포넌트를 누르기 시작해서 떼지 않고 0.5초 이상 있으면 실행되는 함수입니다.
+
+### onPressOut
+
+Pressable 컴포넌트를 누르다가 손을 떼는 순간 실행되는 함수입니다.
+
+### onPress
+
+Pressable 컴포넌트를 누르다가 손을 떼서 onPressOut 함수가 실행된 다음에 실행되는 함수입니다.
+(단, 0.5초 이상 눌렀을 경우에는 onPressOut 함수 이후에 onPress 함수가 호출되지 않습니다.)
+
+### 샘플코드
+
+```jsx
+<Pressable
+  onPress={() => {
+    setTimesPressed((current) => current + 1);
+  }}
+  style={({ pressed }) => [
+    {
+      backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
+    },
+  ]}
+>
+  {({ pressed }) => (
+    <Text style={styles.text}>
+      {pressed ? "잘 눌렸습니다!" : "눌러봐~~~~~~~~~~~~~"}
+    </Text>
+  )}
+</Pressable>
 ```
