@@ -25,8 +25,8 @@ toc_label: "리액트 네이티브 컴포넌트"
 ### 샘플코드
 
 ```jsx
-import React from "react"
-import { ActivityIndicator, View } from "react-native"
+import React from "react";
+import { ActivityIndicator, View } from "react-native";
 
 const App = () => (
   <View>
@@ -35,9 +35,9 @@ const App = () => (
     <ActivityIndicator size="small" color="#0000ff" />
     <ActivityIndicator size="large" color="#00ff00" />
   </View>
-)
+);
 
-export default App
+export default App;
 ```
 
 ## Button
@@ -55,8 +55,8 @@ export default App
 ### 샘플코드
 
 ```jsx
-import React from "react"
-import { Button, View, Alert } from "react-native"
+import React from "react";
+import { Button, View, Alert } from "react-native";
 
 const App = () => (
   <View>
@@ -65,9 +65,9 @@ const App = () => (
       onPress={() => Alert.alert("Simple Button pressed")}
     />
   </View>
-)
+);
 
-export default App
+export default App;
 ```
 
 ## FlatList
@@ -86,7 +86,7 @@ const data = [
   { id: 1, name: "name_1", email: "email_1@gmail.com" },
   { id: 2, name: "name_2", email: "email_2@gmail.com" },
   { id: 3, name: "name_3", email: "email_3@gmail.com" },
-]
+];
 ```
 
 ### 렌더링 함수 (renderItem)
@@ -98,7 +98,7 @@ const data = [
 
 ```jsx
 // 상태값
-const [selectedId, setSelectedId] = useState(null)
+const [selectedId, setSelectedId] = useState(null);
 
 // 렌더링 함수
 function renderItem({ item }) {
@@ -107,7 +107,7 @@ function renderItem({ item }) {
       <Text>{item.name}</Text>
       <Text>{item.email}</Text>
     </TouchableOpacity>
-  )
+  );
 }
 ```
 
@@ -133,7 +133,7 @@ FlatList 안에 있는 요소들을 렌더링 하는 데에 영향을 주는 값
 ### 샘플코드
 
 ```jsx
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   FlatList,
   SafeAreaView,
@@ -141,16 +141,16 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-} from "react-native"
+} from "react-native";
 
 const data = [
   { id: 1, name: "name_1", email: "email_1@gmail.com" },
   { id: 2, name: "name_2", email: "email_2@gmail.com" },
   { id: 3, name: "name_3", email: "email_3@gmail.com" },
-]
+];
 
 const App = () => {
-  const [selectedId, setSelectedId] = useState(null)
+  const [selectedId, setSelectedId] = useState(null);
 
   function renderItem({ item }) {
     return (
@@ -158,7 +158,7 @@ const App = () => {
         <Text>{item.name}</Text>
         <Text>{item.email}</Text>
       </TouchableOpacity>
-    )
+    );
   }
 
   return (
@@ -170,10 +170,10 @@ const App = () => {
         extraData={selectedId}
       />
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 ## Image / ImageBackground
@@ -190,14 +190,14 @@ export default App
 #### 로컬 이미지 경로
 
 ```js
-require("../react-native-logo.png")
+require("../react-native-logo.png");
 ```
 
 #### 외부 이미지 링크
 
 ```js
 {
-  uri: "https://reactnative.dev/img/tiny_logo.png"
+  uri: "https://reactnative.dev/img/tiny_logo.png";
 }
 ```
 
@@ -205,15 +205,15 @@ require("../react-native-logo.png")
 
 ```js
 {
-  uri: "data:image/png;base64, ... "
+  uri: "data:image/png;base64, ... ";
 }
 ```
 
 ### 샘플코드
 
 ```jsx
-import React from "react"
-import { View, Image, StyleSheet } from "react-native"
+import React from "react";
+import { View, Image, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   tinyLogo: {
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     width: 66,
     height: 58,
   },
-})
+});
 
 const App = () => {
   return (
@@ -255,10 +255,10 @@ const App = () => {
         <Text>이미지 위에 보여집니다</Text>
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 ## KeyboardAvoidingView
@@ -272,7 +272,7 @@ export default App
 ### 샘플코드
 
 ```jsx
-import React from "react"
+import React from "react";
 import {
   View,
   KeyboardAvoidingView,
@@ -282,7 +282,7 @@ import {
   TouchableWithoutFeedback,
   Button,
   Keyboard,
-} from "react-native"
+} from "react-native";
 
 const App = () => {
   return (
@@ -299,8 +299,93 @@ const App = () => {
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
-export default App
+export default App;
+```
+
+## Modal
+
+모달 팝업의 형태를 나타내는 컴포넌트 입니다. 2가지의 애니메이션 타입을 설정할 수 있습니다.
+
+### 애니메이션 타입(animationType)
+
+기본값은 **none**이며, 모달 팝업이 나타나는 애니메이션을 지정할 수 있습니다. **slide**는 아래에서 위로 스윽~ 하고 올라오는 애니메이션이고, **fade**는 투명한 상태에서 점점 뚜렷하게 나타내는 애니메이션입니다.
+
+```js
+<Modal animationType="slide">
+  <Text>Hello World!</Text>
+</Modal>
+<Modal animationType="fade">
+  <Text>Hello World!</Text>
+</Modal>
+<Modal animationType="none">
+  <Text>Hello World!</Text>
+</Modal>
+```
+
+### 팝업의 영역 (transparent)
+
+true 값으로 설정하면 전체 영역을 차지하는 모달팝업을 사용하고, false 라면 내부의 내용에 맞는 영역에만 팝업이 나타납니다.
+
+```js
+<Modal transparent={true}>
+  <Text>Hello World!</Text>
+</Modal>
+```
+
+### 나타내기/숨기기 (visible)
+
+팝업에서 가장 핵심적인 기능인 나타내기/숨기기 입니다. 상태를 관리하는 useState 훅에서 boolean 형태의 값으로 관리하여 사용할 수 있습니다.
+
+```js
+const [modalVisible, setModalVisible] = useState(false);
+
+<Modal visible={modalVisible}>
+  <Text>Hello World!</Text>
+</Modal>;
+```
+
+### 팝업이 닫힐 때 (onRequestClose)
+
+팝업이 닫힐 때 실행되는 함수입니다. 안드로이드에서 뒤로가기, 애플티비의 메뉴 버튼 클릭을 눌렀을 경우와같이 팝업이 닫힐 때 호출될 수 있습니다.
+
+```js
+<Modal
+  onRequestClose={() => {
+    Alert.alert("팝업이 닫힙니다.");
+    setModalVisible(!modalVisible);
+  }}
+>
+  <Text>Hello World!</Text>
+</Modal>
+```
+
+### 샘플코드
+
+```js
+import React, { useState } from "react";
+import { Modal, Text, View, Alert } from "react-native";
+
+const App = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  return (
+    <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("팝업이 닫힙니다.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <Text>Hello World!</Text>
+      </Modal>
+    </View>
+  );
+};
+
+export default App;
 ```
