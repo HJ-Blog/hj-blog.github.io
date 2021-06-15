@@ -519,3 +519,66 @@ const App = () => {
 
 export default App;
 ```
+
+## ScrollView
+
+이 컴포넌트는 조금 혼란스러운 부분이 있습니다. 공식 문서에서는 마치 ... 이것 대신에 FlatList를 사용하면 훨씬 좋다! 라는 느낌으로 설명을 해 두었기 때문입니다.
+<br>
+<br>
+**ScrollView**는 하위로 포함하는 모든 뷰를 다 렌더링 합니다. 따라서 스크롤 안에 너무 많은 화면이 들어간다면, 렌더링에 오랜 시간이 걸릴 수 있습니다. 그러므로 **FlatList**를 사용하면, 화면에 나타난 부분만 렌더링을 하여 로딩 시간을 단축할 수 있습니다.
+<br>
+<br>
+그러면 도대체 **ScrollView**는 언제 써야 할까요!! 스크롤 내부의 정보를 모두 가지고 있어야만 하는 경우에 사용하면 됩니다!
+<br>
+<br>
+예를들면, 상단에 카테고리가 있어야 한다고 가정해 봅시다. 정말 가벼운 텍스트만 보여지는 스크롤 뷰로 구성되어 있으며, 하단에 슬라이드 바가 보여집니다. 이러한 경우에는 슬라이드 바가 텍스트의 영역에 따라서 딱 맞게 이동해주어야 하기 때문에 항상 텍스트를 전부 렌더링을 한 상태여야 합니다.
+
+### StickyHeaderComponent
+
+### contentContainerStyle
+
+### contentOffset
+
+### decelerationRate
+
+### disableIntervalMomentum
+
+### disableScrollViewPanResponder
+
+### horizontal
+
+### invertStickyHeaders
+
+### keyboardDismissMode
+
+### keyboardShouldPersistTaps
+
+### onContentSizeChange
+
+### onMomentumScrollBegin
+
+### onMomentumScrollEnd
+
+### onScroll
+
+### onScrollBeginDrag
+
+### onScrollEndDrag
+
+### pagingEnabled
+
+### refreshControl
+
+### removeClippedSubviews
+
+### scrollEnabled
+
+### showsHorizontalScrollIndicator
+
+### showsVerticalScrollIndicator
+
+### pagingEnabled
+
+### snapToAlignment
+
+### 샘플코드
