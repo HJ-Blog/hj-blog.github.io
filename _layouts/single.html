@@ -104,7 +104,9 @@ layout: default
   let offset = 0;
 
   const root = document.body;
-  const scrollWrap = document.getElementById("main");
+  root.style.position = 'absolute';
+  root.style.width = '100%';
+  const scrollWrap = root;
   if (scrollWrap) {
     height = scrollWrap.getBoundingClientRect().height - 1;
   }
@@ -113,14 +115,13 @@ layout: default
   function smoothScroll() {
     offset += (window.pageYOffset - offset) * speed;
 
-    var scroll =
-      "translateY(-" + offset + "px) translateZ(0)";
+    var scroll = "translateY(-" + offset + "px) translateZ(0)";
     if (scrollWrap) {
       scrollWrap.style.transform = scroll;
     }
 
     requestAnimationFrame(smoothScroll);
   }
-
+  
   smoothScroll();
 </script>
